@@ -6,4 +6,5 @@ node_modules/
 *.tar.gz
 *.zip
 acf-json
+tmp/report
 vendor/
