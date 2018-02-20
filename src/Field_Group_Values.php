@@ -136,7 +136,7 @@ if ( ! class_exists( 'TimJensen\ACF\Field_Group_Values' ) ) :
 		 * @return bool
 		 */
 		protected function has_valid_field_structure( array $field ): bool {
-			return ! empty( $field['name'] );
+			return ! empty( $field['name'] ) && ! empty( $field['type'] );
 		}
 
 		/**
