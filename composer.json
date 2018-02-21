@@ -12,12 +12,16 @@
             "role": "Developer"
         }
     ],
+    "config": {
+        "sort-order": true
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": "^7.0"
     },
     "require-dev": {
+        "infection/infection": "^0.7.1",
         "phpunit/phpunit": "^6"
     },
     "autoload": {
