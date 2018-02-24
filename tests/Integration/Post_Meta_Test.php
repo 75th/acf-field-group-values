@@ -27,7 +27,7 @@ class Post_Meta_Test extends TestCase {
 	public function test_get_all_custom_field_meta() {
 		$get_all_custom_field_meta = get_all_custom_field_meta( $this->post_id, $this->config );
 
-		$test_keys = include __DIR__ . '/test-data/test_keys.php';
+		$test_keys = include TEST_DATA_DIR . '/test_keys.php';
 
 		array_walk( $test_keys, function( $test_key ) use ( $get_all_custom_field_meta ) {
 
@@ -44,7 +44,7 @@ class Post_Meta_Test extends TestCase {
 	 * returned by get_post_meta().
 	 */
 	public function test_get_all_custom_field_meta_clone_fields() {
-		$clone_config = json_decode( file_get_contents( __DIR__ . '/test-data/test_clone_group.json' ), true );
+		$clone_config = json_decode( file_get_contents( TEST_DATA_DIR . '/test_clone_group.json' ), true );
 
 		$get_all_custom_field_meta = get_all_custom_field_meta( $this->post_id, $this->config, [ $clone_config ] );
 

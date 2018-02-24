@@ -9,8 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', true );
 }
 
+if ( ! defined( 'TEST_DATA_DIR' ) ) {
+	define( 'TEST_DATA_DIR', __DIR__ . '/test-data' );
+}
+
 function get_test_data( $type ) {
-	$test_data = include __DIR__ . '/test-data/test_data.php';
+	$test_data = include TEST_DATA_DIR . '/test_data.php';
 	return $test_data[ $type ];
 }
 

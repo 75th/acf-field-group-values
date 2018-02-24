@@ -1,6 +1,6 @@
 <?php
 /**
- * Class Field_Group_Values_Test
+ * Class Field_Group_Values_Unit_Test
  *
  * @package     TimJensen\ACF\Tests
  * @author      Tim Jensen <tim@timjensen.us>
@@ -12,11 +12,11 @@
 namespace TimJensen\ACF\Tests;
 
 /**
- * Class Field_Group_Values_Test
+ * Class Field_Group_Values_Unit_Test
  *
  * @package TimJensen\ACF\Tests
  */
-class Field_Group_Values_Test extends TestCase {
+class Field_Group_Values_Unit_Test extends TestCase {
 
 	/**
 	 * Holds an instance of \TimJensen\ACF\Field_Group_Values.
@@ -39,29 +39,9 @@ class Field_Group_Values_Test extends TestCase {
 		parent::setUp();
 
 		$this->instance = new \TimJensen\ACF\Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
+		$this->field    = $this->config['fields'][0];
+
 		$this->instance->get_results();
-
-		$this->field = $this->config['fields'][0];
-	}
-
-	/**
-	 * Calls the protected method that has the name of the calling function, less the string 'test_'.
-	 * For example, the test method `test_has_valid_field_structure()` will call `has_valid_field_structure()`.
-	 *
-	 * @param array  $args Array of arguments to pass to \TimJensen\ACF\Field_Group_Values.
-	 * @param string $function
-	 * @return mixed
-	 */
-	protected function get_protected_method_result( array $args = [ null ], $function = '' ) {
-
-		// If no function is specified, get the name of the calling function and strip out 'test_'.
-		$function = $function ? $function : str_replace( 'test_', '', debug_backtrace()[1]['function'] );
-
-		return self::call_protected_method(
-			$this->instance,
-			$function,
-			$args
-		);
 	}
 
 	/**
@@ -73,8 +53,8 @@ class Field_Group_Values_Test extends TestCase {
 
 		$this->get_protected_method_result();
 
-		$reset_results_array = $this->instance->results;
-		$this->assertTrue( empty( $reset_results_array ) );
+		$results_array = $this->instance->results;
+		$this->assertTrue( empty( $results_array ) );
 	}
 
 	/**
@@ -92,8 +72,14 @@ class Field_Group_Values_Test extends TestCase {
 	 * Test get_field_key().
 	 */
 	public function test_get_field_key() {
-		$subfields = $this->get_protected_method_result( [ $this->field['type'], $this->field['sub_fields'], $this->field['name'] ],
-			'set_meta_key_prefix' );
+		$subfields = $this->get_protected_method_result(
+			[
+				$this->field['type'],
+				$this->field['sub_fields'],
+				$this->field['name'],
+			],
+			'set_meta_key_prefix'
+		);
 
 		$field_key = $this->get_protected_method_result( [ $subfields[0] ] );
 
