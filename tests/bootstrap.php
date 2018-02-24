@@ -19,7 +19,7 @@ function get_test_data( $type ) {
 }
 
 function get_post_meta( $post_id = null, $key, $single = false ) {
-	$test_data = get_test_data( 'Post_Meta_Test' );
+	$test_data = get_test_data( 'post_meta' );
 
 	return empty( $test_data[ $key ] ) ? '' : $test_data[ $key ];
 }
