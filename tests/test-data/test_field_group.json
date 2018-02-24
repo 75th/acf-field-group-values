@@ -270,6 +270,28 @@
             "max": ""
         },
         {
+            "key": "field_5a1479f817419",
+            "label": "Clone",
+            "name": "clone",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5a14771d289be",
+                "field_5a1479742d333"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5a8c05e17fb0d",
             "label": "Flexible Content - Empty",
             "name": "flexcontent_empty",
@@ -345,28 +367,6 @@
             "button_label": "Add Row",
             "min": "",
             "max": ""
-        },
-        {
-            "key": "field_5a1479f817419",
-            "label": "Clone",
-            "name": "clone",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5a14771d289be",
-                "field_5a1479742d333"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
         },
         {
             "key": "field_5a8c05cbacc7f",
@@ -480,5 +480,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1519127213
+    "modified": 1519515732
 }
