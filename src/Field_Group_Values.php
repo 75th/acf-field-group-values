@@ -84,7 +84,7 @@ if ( ! class_exists( 'TimJensen\ACF\Field_Group_Values' ) ) :
 				switch ( $field['type'] ) :
 
 					case 'group':
-						$this->get_group_field_values( $field, $field_key, $field_value );
+						$this->get_group_field_values( $field, $field_key );
 
 						break;
 
@@ -355,10 +355,9 @@ if ( ! class_exists( 'TimJensen\ACF\Field_Group_Values' ) ) :
 		 *
 		 * @param array  $field           ACF field configuration.
 		 * @param string $parent_meta_key Field key.
-		 * @param string $field_value     Field value.
 		 * @return void
 		 */
-		protected function get_group_field_values( array $field, string $parent_meta_key, string $field_value ) {
+		protected function get_group_field_values( array $field, string $parent_meta_key ) {
 			$results = $this->results;
 
 			$field['sub_fields'] = $this->set_meta_key_prefix( 'group', $field['sub_fields'], $parent_meta_key );
