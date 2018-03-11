@@ -1,6 +1,6 @@
 <?php
 /**
- * Class Field_Group_Values_System_Test
+ * Class Get_All_Custom_Field_Meta_System_Test
  *
  * @package     TimJensen\ACF\Tests
  * @author      Tim Jensen <tim@timjensen.us>
@@ -12,25 +12,25 @@
 namespace TimJensen\ACF\Tests;
 
 /**
- * Class Field_Group_Values_System_Test
+ * Class Get_All_Custom_Field_Meta_System_Test
  *
  * @package TimJensen\ACF\Tests
  */
-class Field_Group_Values_System_Test extends TestCase {
+class Get_All_Custom_Field_Meta_System_Test extends TestCase {
 
 	/**
 	 * ID of the test post.
 	 *
 	 * @var int
 	 */
-	public $post_id = 0;
+	public $post_id;
 
 	/**
 	 * ID of the test term.
 	 *
 	 * @var int
 	 */
-	public $term_id = 0;
+	public $term_id;
 
 	/**
 	 * Test setup
@@ -106,8 +106,7 @@ class Field_Group_Values_System_Test extends TestCase {
 	}
 
 	public function test_post_meta_field_group_values() {
-		$field_group_values = new \TimJensen\ACF\Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
-		$field_group_values->get_results();
+		$field_group_values = get_all_custom_field_meta( $this->post_id, $this->config, $this->clone_fields );
 
 		$post_meta_test_data = \get_test_data( 'post_meta' );
 
@@ -122,8 +121,7 @@ class Field_Group_Values_System_Test extends TestCase {
 	}
 
 	public function test_term_meta_field_group_values() {
-		$field_group_values = new \TimJensen\ACF\Field_Group_Values( "term_{$this->term_id}", $this->config, $this->clone_fields );
-		$field_group_values->get_results();
+		$field_group_values = get_all_custom_field_meta( "term_{$this->term_id}", $this->config, $this->clone_fields );
 
 		$post_meta_test_data = \get_test_data( 'term_meta' );
 
@@ -138,8 +136,7 @@ class Field_Group_Values_System_Test extends TestCase {
 	}
 
 	public function test_option_field_group_values() {
-		$field_group_values = new \TimJensen\ACF\Field_Group_Values( 'option', $this->config, $this->clone_fields );
-		$field_group_values->get_results();
+		$field_group_values = get_all_custom_field_meta( 'option', $this->config, $this->clone_fields );
 
 		$post_meta_test_data = \get_test_data( 'options' );
 
@@ -160,7 +157,7 @@ class Field_Group_Values_System_Test extends TestCase {
 	protected function lookup_value_in_results_array( $field_group_values, $meta_key ) {
 		$array_dimensions = explode( '_', $meta_key );
 
-		$result = $field_group_values->get_results();
+		$result = $field_group_values;
 		foreach ( $array_dimensions as $partial_key ) {
 			// Account for clone fields.
 			if ( isset( $result[ $partial_key ] ) ) {
