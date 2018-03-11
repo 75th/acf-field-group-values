@@ -11,6 +11,8 @@
 
 namespace TimJensen\ACF\Tests;
 
+use TimJensen\ACF\Field_Group_Values;
+
 /**
  * Class Field_Group_Values_Unit_Test
  *
@@ -38,7 +40,7 @@ class Field_Group_Values_Unit_Test extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->instance = new \TimJensen\ACF\Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
+		$this->instance = new Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
 		$this->field    = $this->config['fields'][0];
 
 		$this->instance->get_results();
@@ -98,17 +100,17 @@ class Field_Group_Values_Unit_Test extends TestCase {
 		$this->assertEquals( 'POST META: Group text field', $field_value );
 
 		// Option.
-		$this->instance = new \TimJensen\ACF\Field_Group_Values( 'option', $this->config );
+		$this->instance = new Field_Group_Values( 'option', $this->config );
 		$field_value    = $this->get_protected_method_result( [ 'group_text' ] );
 		$this->assertEquals( 'OPTION: Group text field', $field_value );
 
 		// Option, alternate key.
-		$this->instance = new \TimJensen\ACF\Field_Group_Values( 'options', $this->config );
+		$this->instance = new Field_Group_Values( 'options', $this->config );
 		$field_value    = $this->get_protected_method_result( [ 'group_text' ] );
 		$this->assertEquals( 'OPTION: Group text field', $field_value );
 
 		// Term meta.
-		$this->instance = new \TimJensen\ACF\Field_Group_Values( 'term_2', $this->config );
+		$this->instance = new Field_Group_Values( 'term_2', $this->config );
 		$field_value    = $this->get_protected_method_result( [ 'group_text' ] );
 		$this->assertEquals( 'TERM META: Group text field', $field_value );
 	}

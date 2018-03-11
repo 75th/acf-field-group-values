@@ -11,6 +11,8 @@
 
 namespace TimJensen\ACF\Tests;
 
+use TimJensen\ACF\Field_Group_Values;
+
 /**
  * Class Get_All_Custom_Field_Meta_Test
  *
@@ -31,7 +33,7 @@ class Get_All_Custom_Field_Meta_Test extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->instance = new \TimJensen\ACF\Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
+		$this->instance = new Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
 	}
 
 	/**

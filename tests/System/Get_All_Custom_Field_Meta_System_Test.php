@@ -11,6 +11,8 @@
 
 namespace TimJensen\ACF\Tests;
 
+use TimJensen\ACF\Field_Group_Values;
+
 /**
  * Class Get_All_Custom_Field_Meta_System_Test
  *
@@ -97,7 +99,7 @@ class Get_All_Custom_Field_Meta_System_Test extends TestCase {
 	 * the class directly.
 	 */
 	public function test_function_and_class_return_same_result() {
-		$field_group_values = new \TimJensen\ACF\Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
+		$field_group_values = new Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
 
 		$this->assertEquals(
 			$field_group_values->get_results(),
