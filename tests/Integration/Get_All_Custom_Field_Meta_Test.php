@@ -56,4 +56,82 @@ class Get_All_Custom_Field_Meta_Test extends TestCase {
 			get_all_custom_field_meta( $this->post_id, $this->config, $this->clone_fields )
 		);
 	}
+
+	/**
+	 * Confirm values returned by get_all_custom_field_meta() are equal to values
+	 * returned by get_post_meta().
+	 */
+	public function test_options_get_all_custom_field_meta() {
+		$get_all_custom_field_meta = get_all_custom_field_meta( 'option', $this->config );
+
+		$test_keys = include TEST_DATA_DIR . '/test_keys.php';
+
+		array_walk( $test_keys, function( $test_key ) use ( $get_all_custom_field_meta ) {
+			$this->assertEquals(
+				get_option( "options_{$test_key}" ),
+				$this->get_value_by_key( $test_key, $get_all_custom_field_meta )
+			);
+		} );
+	}
+
+	/**
+	 * Confirm values returned by get_all_custom_field_meta() are equal to values
+	 * returned by get_post_meta().
+	 */
+	public function test_post_meta_get_all_custom_field_meta() {
+		$get_all_custom_field_meta = get_all_custom_field_meta( $this->post_id, $this->config );
+
+		$test_keys = include TEST_DATA_DIR . '/test_keys.php';
+
+		array_walk( $test_keys, function( $test_key ) use ( $get_all_custom_field_meta ) {
+
+			$this->assertEquals(
+				get_post_meta( $this->post_id, $test_key, true ),
+				$this->get_value_by_key( $test_key, $get_all_custom_field_meta )
+			);
+
+		} );
+	}
+
+	/**
+	 * Confirm clone field values returned by get_all_custom_field_meta() are equal to values
+	 * returned by get_post_meta().
+	 */
+	public function test_post_meta_clone_fields_get_all_custom_field_meta() {
+		$clone_config = json_decode( file_get_contents( TEST_DATA_DIR . '/test_clone_group.json' ), true );
+
+		$get_all_custom_field_meta = get_all_custom_field_meta( $this->post_id, $this->config, [ $clone_config ] );
+
+		$clone_keys = [
+			'clone-text',
+			'clone-repeater_0_subfield',
+			'clone-repeater_1_subfield',
+		];
+
+		array_walk( $clone_keys, function( $clone_key ) use ( $get_all_custom_field_meta ) {
+
+			$this->assertEquals(
+				get_post_meta( $this->post_id, $clone_key, true ),
+				$this->get_value_by_key( "clone_$clone_key", $get_all_custom_field_meta )
+			);
+
+		} );
+	}
+
+	/**
+	 * Confirm values returned by get_all_custom_field_meta() are equal to values
+	 * returned by get_post_meta().
+	 */
+	public function test_term_meta_get_all_custom_field_meta() {
+		$get_all_custom_field_meta = get_all_custom_field_meta( 'term_0', $this->config );
+
+		$test_keys = include TEST_DATA_DIR . '/test_keys.php';
+
+		array_walk( $test_keys, function ( $test_key ) use ( $get_all_custom_field_meta ) {
+			$this->assertEquals(
+				get_term_meta( 0, $test_key, true ),
+				$this->get_value_by_key( $test_key, $get_all_custom_field_meta )
+			);
+		} );
+	}
 }
