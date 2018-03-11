@@ -93,21 +93,23 @@ class Field_Group_Values_Unit_Test extends TestCase {
 	 * Test get_field_value().
 	 */
 	public function test_get_field_value() {
-
+		// Post meta.
 		$field_value = $this->get_protected_method_result( [ 'group_text' ] );
-
 		$this->assertEquals( 'POST META: Group text field', $field_value );
 
+		// Option.
 		$this->instance = new \TimJensen\ACF\Field_Group_Values( 'option', $this->config );
-
-		$field_value = $this->get_protected_method_result( [ 'group_text' ] );
-
+		$field_value    = $this->get_protected_method_result( [ 'group_text' ] );
 		$this->assertEquals( 'OPTION: Group text field', $field_value );
 
-		$this->instance = new \TimJensen\ACF\Field_Group_Values( 'term_id_2', $this->config );
+		// Option, alternate key.
+		$this->instance = new \TimJensen\ACF\Field_Group_Values( 'options', $this->config );
+		$field_value    = $this->get_protected_method_result( [ 'group_text' ] );
+		$this->assertEquals( 'OPTION: Group text field', $field_value );
 
-		$field_value = $this->get_protected_method_result( [ 'group_text' ] );
-
+		// Term meta.
+		$this->instance = new \TimJensen\ACF\Field_Group_Values( 'term_2', $this->config );
+		$field_value    = $this->get_protected_method_result( [ 'group_text' ] );
 		$this->assertEquals( 'TERM META: Group text field', $field_value );
 	}
 
