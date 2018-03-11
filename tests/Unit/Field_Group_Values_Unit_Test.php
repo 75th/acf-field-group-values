@@ -167,4 +167,23 @@ class Field_Group_Values_Unit_Test extends TestCase {
 			} );
 		}
 	}
+
+	public function test_get_clone_field_config() {
+		// From test_field_group.json.
+		$clone_field_keys = [ 'group_5a14771d289be', 'field_5a1479742d333' ];
+
+		$expected_config_1  = $this->instance->clone_fields[1]['fields'];
+		$clone_field_config = $this->get_protected_method_result( [
+			'group_5a14771d289be',
+			$this->instance->clone_fields,
+		] );
+		$this->assertEquals( $expected_config_1, $clone_field_config );
+
+		$expected_config_2  = $this->instance->clone_fields[1]['fields'][1]['sub_fields'];
+		$clone_field_config = $this->get_protected_method_result( [
+			'field_5a1479742d333',
+			$this->instance->clone_fields,
+		] );
+		$this->assertEquals( $expected_config_2, $clone_field_config );
+	}
 }
