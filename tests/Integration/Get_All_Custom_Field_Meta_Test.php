@@ -11,6 +11,7 @@
 
 namespace TimJensen\ACF\Tests;
 
+use Brain\Monkey;
 use TimJensen\ACF\Field_Group_Values;
 
 /**
@@ -31,9 +32,38 @@ class Get_All_Custom_Field_Meta_Test extends TestCase {
 	 * Test setup
 	 */
 	public function setUp() {
+		Monkey\setUp();
 		parent::setUp();
 
+		Monkey\Functions\stubs( [
+			'get_post_meta' => function ( $post_id = null, $key, $single = false ) {
+				$test_data = \get_test_data( 'post_meta' );
+
+				return empty( $test_data[ $key ] ) ? '' : $test_data[ $key ];
+			},
+			'get_option'    => function ( $key ) {
+				$test_data = \get_test_data( 'options' );
+
+				$key = str_replace( 'options_', '', $key );
+
+				return empty( $test_data[ $key ] ) ? '' : $test_data[ $key ];
+			},
+			'get_term_meta' => function ( $post_id = null, $key, $single = false ) {
+				$test_data = \get_test_data( 'term_meta' );
+
+				return empty( $test_data[ $key ] ) ? '' : $test_data[ $key ];
+			},
+		] );
+
 		$this->instance = new Field_Group_Values( $this->post_id, $this->config, $this->clone_fields );
+	}
+
+	/**
+	 * Test tear down.
+	 */
+	public function tearDown() {
+		Monkey\tearDown();
+		parent::tearDown();
 	}
 
 	/**

@@ -22,7 +22,8 @@
     },
     "require-dev": {
         "infection/infection": "^0.7.1",
-        "phpunit/phpunit": "^6"
+        "phpunit/phpunit": "^6",
+        "brain/monkey": "^2"
     },
     "autoload": {
         "psr-4": {

@@ -27,32 +27,7 @@ function is_system_test() {
 	return $phpunit_key && 'system' === $phpunit_argv[ $phpunit_key + 1 ];
 }
 
-if ( ! is_system_test() ) {
-
-	function get_post_meta( $post_id = null, $key, $single = false ) {
-		$test_data = get_test_data( 'post_meta' );
-
-		return empty( $test_data[ $key ] ) ? '' : $test_data[ $key ];
-	}
-
-	function get_option( $key ) {
-		$test_data = get_test_data( 'options' );
-
-		$key = str_replace( 'options_', '', $key );
-
-		return empty( $test_data[ $key ] ) ? '' : $test_data[ $key ];
-	}
-
-	function get_term_meta( $post_id = null, $key, $single = false ) {
-		$test_data = get_test_data( 'term_meta' );
-
-		return empty( $test_data[ $key ] ) ? '' : $test_data[ $key ];
-	}
-} else {
-	load_wordpress();
-}
-
-function load_wordpress() {
+if ( is_system_test() ) {
 	$_tests_dir = getenv( 'WP_TESTS_DIR' );
 	if ( ! $_tests_dir ) {
 		$_tests_dir = '/tmp/wordpress-tests-lib';
